@@ -1,0 +1,9 @@
+<mat-form-field style="width: 100%">
+  <mat-label>{{ label() }}</mat-label>
+  <input
+    matInput
+    type="text"
+    [(ngModel)]="filter"
+    [placeholder]="placeholder()"
+  />
+</mat-form-field>

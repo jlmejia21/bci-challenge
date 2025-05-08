@@ -1,0 +1,21 @@
+<mat-toolbar
+  color="primary"
+  style="display: flex; justify-content: space-between"
+>
+  <section>
+    <!-- <a mat-button routerLink="/">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a> -->
+
+    <a mat-button routerLink="/movies">
+      <mat-icon>list_alt</mat-icon>
+      <span>Peliculas</span>
+    </a>
+  </section>
+
+  <a mat-button (click)="emitClick()">
+    <mat-icon>add_box</mat-icon>
+    <span>Nuevo</span>
+  </a>
+</mat-toolbar>

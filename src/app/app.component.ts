@@ -1,12 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+
+import { MatCardModule } from '@angular/material/card';
+import { ModalComponent } from './components/modal/modal.component';
+import { ModalService } from './components/modal/modal.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ToolbarComponent, MatCardModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'bci-challenge';
+  private readonly _modalSvc = inject(ModalService);
+
+  onClickNewMovie(): void {
+    this._modalSvc.openDialog(ModalComponent);
+  }
 }
