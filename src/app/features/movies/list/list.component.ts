@@ -1,18 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { GridComponent } from '@components/grid/grid.component';
-
-const ELEMENT_DATA: any[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-];
+import { Column } from '../movie.interfaces';
+import { MovieService } from '../movie.service';
 
 @Component({
   selector: 'app-list',
@@ -22,13 +11,19 @@ const ELEMENT_DATA: any[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent {
-  displayedColumns: string[] = [
-    'position',
-    'name',
-    'weight',
-    'symbol',
-    'action',
+  private readonly _movieService = inject(MovieService);
+
+  displayedColumns: Column[] = [
+    { key: 'id', label: 'ID' },
+    { key: 'originalTitle', label: 'Título' },
+    { key: 'releaseDate', label: 'Fecha de lanzamiento' },
+    { key: 'primaryImage', label: 'Imagen' },
+    { key: 'action', label: 'Acciones' },
   ];
-  data = ELEMENT_DATA;
-  sortables = ['position', 'name', 'weight', 'symbol'];
+  data = this._movieService.movies;
+  sortables = ['id', 'originalTitle', 'releaseDate'];
+
+  constructor() {
+    this._movieService.loadMovies();
+  }
 }

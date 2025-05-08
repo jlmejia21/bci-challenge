@@ -1,7 +1,11 @@
+import { Column } from '@/features/movies/movie.interfaces';
+import { MovieService } from '@/features/movies/movie.service';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
+  inject,
   input,
   OnInit,
   signal,
@@ -28,7 +32,11 @@ import { FilterComponent } from './filter/filter.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridComponent<T> implements OnInit {
-  displayedColumns = input.required<string[]>();
+  displayedColumns = input.required<Column[]>();
+  headersColumns = computed(() =>
+    this.displayedColumns().map((column) => column.key)
+  );
+
   data = input.required<T[]>();
   sortableColumns = input<string[]>([]);
 
@@ -36,6 +44,7 @@ export class GridComponent<T> implements OnInit {
   filter = signal('');
   private readonly _sort = viewChild.required<MatSort>(MatSort);
   private readonly _paginator = viewChild.required<MatPaginator>(MatPaginator);
+  private readonly _movieService = inject(MovieService);
 
   constructor() {
     effect(
@@ -45,6 +54,8 @@ export class GridComponent<T> implements OnInit {
         } else {
           this.dataSource.filter = '';
         }
+        // update the data source
+        this.dataSource.data = this.data();
       },
       { allowSignalWrites: true }
     );
@@ -56,8 +67,7 @@ export class GridComponent<T> implements OnInit {
     this.dataSource.paginator = this._paginator();
   }
 
-  // applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
-  // }
+  deleteMovie(id: string): void {
+    this._movieService.deleteMovie(id);
+  }
 }
