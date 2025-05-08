@@ -15,6 +15,6 @@ export class AppComponent {
   private readonly _modalSvc = inject(ModalService);
 
   onClickNewMovie(): void {
-    this._modalSvc.openDialog(ModalComponent);
+    this._modalSvc.openDialog(ModalComponent, 'Crear película');
   }
 }

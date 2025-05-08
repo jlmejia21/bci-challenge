@@ -1,59 +1,32 @@
-# BciChallenge
+# 🎬 Angular 19 - CRUD de Películas con Peor Puntuación (IMDB API + Angular Material)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
+Este proyecto es una aplicación Angular 19 que consume el API de IMDB (vía RapidAPI) para mostrar las películas con peor calificación. La interfaz está diseñada con Angular Material y permite realizar operaciones básicas de tipo CRUD (Crear, Leer, Actualizar, Eliminar) simuladas en el frontend.
 
-## Development server
+## 🔗 API utilizada
 
-To start a local development server, run:
+- **Endpoint:** `https://imdb236.p.rapidapi.com/imdb/lowest-rated-movies`
+- **Host:** `imdb236.p.rapidapi.com`
+- **Requiere:** Header con `X-RapidAPI-Key` y `X-RapidAPI-Host`
 
-```bash
-ng serve
-```
+> ⚠️ El endpoint solo proporciona lectura, por lo que las operaciones de creación, actualización y eliminación se simulan en memoria.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🧱 Tecnologías
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Angular 19
+- Angular Material
+- RxJS
+- Signal
+- TypeScript
+- RapidAPI
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## 🚀 Instalación
 
 ```bash
-ng build
+git clone https://github.com/jlmejia21/bci-challenge.git
+cd bci-challeng
+npm install
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

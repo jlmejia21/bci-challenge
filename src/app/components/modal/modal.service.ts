@@ -8,8 +8,13 @@ import { Observable } from 'rxjs';
 export class ModalService {
   private readonly _dialog = inject(MatDialog);
 
-  openDialog<T>(component: any, data?: T, isEditing = false): Observable<any> {
-    const config = { data, isEditing };
+  openDialog<T>(
+    component: any,
+    title: string,
+    data?: T,
+    isEditing = false
+  ): Observable<any> {
+    const config = { title, data, isEditing };
 
     const dialogRef = this._dialog.open(component, {
       width: '600px',
@@ -19,7 +24,7 @@ export class ModalService {
     return dialogRef.afterClosed();
   }
 
-  closeAllDialogs(): void {
+  closeModal(): void {
     this._dialog.closeAll();
   }
 }

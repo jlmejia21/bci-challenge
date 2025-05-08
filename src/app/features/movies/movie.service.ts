@@ -47,7 +47,7 @@ export class MovieService {
   addMovie(movie: Movie): void {
     this.moviesSignal.update((movies) => {
       const current = movies ?? [];
-      return [...current, movie];
+      return [movie, ...current];
     });
   }
 
