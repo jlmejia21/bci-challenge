@@ -13,6 +13,11 @@
         <mat-error *ngIf="movieForm.get('originalTitle')?.hasError('pattern')">
           Solo se permiten letras, números y signos de puntuación comunes.
         </mat-error>
+        <mat-error
+          *ngIf="movieForm.get('originalTitle')?.hasError('titleExists')"
+        >
+          Ya existe una película con ese título.
+        </mat-error>
       </mat-form-field>
     </div>
 

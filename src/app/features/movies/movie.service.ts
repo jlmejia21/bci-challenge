@@ -44,6 +44,17 @@ export class MovieService {
     }
   }
 
+  findMovieByName(originalTitle: string): Movie | null {
+    const movies = this.moviesSignal();
+    if (!movies) {
+      return null;
+    }
+    const movie = movies.find(
+      (m) => m.originalTitle.toUpperCase() === originalTitle.toUpperCase()
+    );
+    return movie ?? null;
+  }
+
   addMovie(movie: Movie): void {
     this.moviesSignal.update((movies) => {
       const current = movies ?? [];

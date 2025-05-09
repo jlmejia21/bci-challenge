@@ -6,7 +6,9 @@ import { generateImdbLikeId } from '@/shared/utils';
 import { DatePipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -60,8 +62,29 @@ export class ModalComponent {
 
   private _buildForm(): void {
     this.movieForm = this._fb.nonNullable.group({
-      originalTitle: ['', Validators.required],
-      releaseDate: ['', Validators.required],
+      originalTitle: new FormControl(null, {
+        nonNullable: true,
+        validators: [Validators.required],
+        asyncValidators: [this.titleUniqueValidator.bind(this)],
+        updateOn: 'blur',
+      }),
+      releaseDate: new FormControl(null, {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+    });
+  }
+
+  titleUniqueValidator(
+    control: AbstractControl
+  ): Promise<{ [key: string]: boolean } | null> {
+    return new Promise((resolve) => {
+      const movie = this._movieService.findMovieByName(control.value);
+      if (movie && this._matDialog.data?.originalTitle !== control.value) {
+        resolve({ titleExists: true });
+      } else {
+        resolve(null);
+      }
     });
   }
 
