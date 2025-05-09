@@ -33,3 +33,8 @@ table.responsive-table {
     height: auto;
   }
 }
+
+mat-paginator {
+  min-width: 600px; // Adjust based on table size
+  margin-top: 16px;
+}
