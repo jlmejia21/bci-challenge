@@ -7,6 +7,12 @@
       <mat-form-field appearance="outline">
         <mat-label> Nombre </mat-label>
         <input matInput type="text" formControlName="originalTitle" />
+        <mat-error *ngIf="movieForm.get('originalTitle')?.hasError('required')">
+          El nombre es obligatorio
+        </mat-error>
+        <mat-error *ngIf="movieForm.get('originalTitle')?.hasError('pattern')">
+          Solo se permiten letras, números y signos de puntuación comunes.
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -21,9 +27,9 @@
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <!-- <mat-error *ngIf="form.get('startDate')?.hasError('required')">
+        <mat-error *ngIf="movieForm.get('releaseDate')?.hasError('required')">
           La fecha es obligatoria
-        </mat-error> -->
+        </mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -32,7 +38,7 @@
       Cancel
     </button>
     <button
-      [disabled]="!movieForm.valid"
+      [disabled]="!movieForm.valid || movieForm.pristine"
       mat-raised-button
       color="primary"
       type="submit"

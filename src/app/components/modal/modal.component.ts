@@ -3,7 +3,7 @@ import { MovieService } from '@/features/movies/movie.service';
 import { MOVIES_CONSTANTS } from '@/shared/constants';
 import { SnackBarService } from '@/shared/snack-bar.service';
 import { generateImdbLikeId } from '@/shared/utils';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormBuilder,
@@ -34,6 +34,7 @@ import { ModalService } from './modal.service';
     MatButtonModule,
     MatInputModule,
     MatDatepickerModule,
+    NgIf,
   ],
   providers: [provideNativeDateAdapter(), DatePipe],
   templateUrl: './modal.component.html',

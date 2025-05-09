@@ -24,7 +24,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ModalComponent } from '../modal/modal.component';
 import { ModalService } from '../modal/modal.service';
-import { FilterComponent } from './filter/filter.component';
+import { FilterComponent } from './components/filter/filter.component';
 @Component({
   selector: 'app-grid',
   imports: [
