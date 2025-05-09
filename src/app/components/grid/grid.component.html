@@ -4,8 +4,8 @@
     [placeholder]="'Buscando...'"
     [(filter)]="filter"
   />
-  <div class="mat-elevation-z8">
-    <table mat-table matSort [dataSource]="dataSource">
+  <div class="table-wrapper mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource" class="responsive-table">
       @for(column of displayedColumns(); track $index){
       <ng-container [matColumnDef]="column.key">
         @if(this.sortableColumns().includes(column.key)){

@@ -1,0 +1,35 @@
+.table-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+table.responsive-table {
+  width: 100%;
+  min-width: 600px; // mínimo para que no se rompa en escritorio
+}
+
+@media screen and (max-width: 768px) {
+  table.responsive-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .mat-header-row,
+  .mat-row {
+    display: block;
+  }
+
+  .mat-cell,
+  .mat-header-cell {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .mat-cell img {
+    max-width: 100%;
+    height: auto;
+  }
+}
