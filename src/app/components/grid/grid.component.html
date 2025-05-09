@@ -4,46 +4,63 @@
     [placeholder]="'Buscando...'"
     [(filter)]="filter"
   />
-  <div class="table-wrapper mat-elevation-z8">
-    <table mat-table matSort [dataSource]="dataSource" class="responsive-table">
-      @for(column of displayedColumns(); track $index){
-      <ng-container [matColumnDef]="column.key">
-        @if(this.sortableColumns().includes(column.key)){
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ column.label }}
-        </th>
-        }@else{
-        <th mat-header-cell *matHeaderCellDef>{{ column.label }}</th>
-        }
-        <td mat-cell *matCellDef="let element">
-          @if(column.key === 'primaryImage'){
-          <img
-            [src]="element[column.key]"
-            [alt]="column.label"
-            style="width: 50px; height: 50px"
-          />
+  <div class="table-scroll-container">
+    <button class="scroll-btn left" (click)="scrollTable('left')">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <div class="table-wrapper mat-elevation-z8" #scrollableWrapper>
+      <table
+        mat-table
+        matSort
+        [dataSource]="dataSource"
+        class="responsive-table"
+      >
+        @for(column of displayedColumns(); track $index){
+        <ng-container [matColumnDef]="column.key">
+          @if(this.sortableColumns().includes(column.key)){
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            {{ column.label }}
+          </th>
           }@else{
-          {{ element[column.key] }}
-          } @if(column.key === 'action'){
-          <button mat-icon-button color="primary" (click)="editMovie(element)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            color="warn"
-            (click)="deleteMovie(element.id)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
+          <th mat-header-cell *matHeaderCellDef>{{ column.label }}</th>
           }
-        </td>
-      </ng-container>
-      }
-      <tr mat-header-row *matHeaderRowDef="headersColumns()"></tr>
-      <tr mat-row *matRowDef="let row; columns: headersColumns()"></tr>
-    </table>
+          <td mat-cell *matCellDef="let element">
+            @if(column.key === 'primaryImage'){
+            <img
+              [src]="element[column.key]"
+              [alt]="column.label"
+              style="width: 50px; height: 50px"
+            />
+            }@else{
+            {{ element[column.key] }}
+            } @if(column.key === 'action'){
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="editMovie(element)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="deleteMovie(element.id)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            }
+          </td>
+        </ng-container>
+        }
+        <tr mat-header-row *matHeaderRowDef="headersColumns()"></tr>
+        <tr mat-row *matRowDef="let row; columns: headersColumns()"></tr>
+      </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
-    </mat-paginator>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+    <button class="scroll-btn right" (click)="scrollTable('right')">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
   </div>
 </section>

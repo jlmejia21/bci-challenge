@@ -8,10 +8,12 @@ import {
   Component,
   computed,
   effect,
+  ElementRef,
   inject,
   input,
   OnInit,
   signal,
+  ViewChild,
   viewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -48,6 +50,9 @@ export class GridComponent<T> implements OnInit {
 
   dataSource = new MatTableDataSource<T>();
   filter = signal('');
+
+  @ViewChild('scrollableWrapper') scrollableWrapper!: ElementRef;
+
   private readonly _sort = viewChild.required<MatSort>(MatSort);
   private readonly _paginator = viewChild.required<MatPaginator>(MatPaginator);
   private readonly _movieService = inject(MovieService);
@@ -101,6 +106,16 @@ export class GridComponent<T> implements OnInit {
       this._snackBarService.showSnackBar(
         MOVIES_CONSTANTS.MESSAGES.MOVIE_DELETED
       );
+    });
+  }
+
+  scrollTable(direction: 'left' | 'right') {
+    const container = this.scrollableWrapper.nativeElement as HTMLElement;
+    const scrollAmount = 250;
+
+    container.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
     });
   }
 }

@@ -1,6 +1,49 @@
+.table-scroll-container {
+  position: relative;
+}
+
+.scroll-btn {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background-color: #3f51b5; /* Color primario de Angular Material */
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.scroll-btn:hover {
+  background-color: #303f9f; /* Un poco más oscuro al pasar el mouse */
+}
+
+.scroll-btn.left {
+  left: 8px;
+}
+
+.scroll-btn.right {
+  right: 8px;
+}
+
+@media screen and (max-width: 600px) {
+  .scroll-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// table
 .table-wrapper {
   overflow-x: auto;
   max-width: 100%;
+  scroll-behavior: smooth;
+  padding: 0px 35px;
 }
 
 table.responsive-table {
@@ -33,7 +76,7 @@ table.responsive-table {
     height: auto;
   }
 }
-
+// pagitation
 mat-paginator {
   min-width: 600px; // Adjust based on table size
   margin-top: 16px;
